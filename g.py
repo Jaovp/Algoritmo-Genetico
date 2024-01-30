@@ -8,18 +8,23 @@ def population(n_de_individuos, n_de_itens):
     """"Cria a populacao"""
     return [ individual(n_de_itens) for x in range(n_de_individuos) ]
 
-def fitness(individuo, peso_maximo, pesos_valores):
-    """Faz avaliação do indivíduo"""
-    peso_total, valor_total = 0, 0
-    for indice, presente in enumerate(individuo):
-        peso_total += presente * pesos_valores[indice][0]
-        valor_total += presente * pesos_valores[indice][1]
 
-    if peso_total > peso_maximo:
-        return 0  # Se exceder o peso máximo, fitness é zero
-    else:
-        return peso_total  #  fitness é o valor total
-    
+def fitness(individuo, peso_maximo, pesos_valores):
+    total_peso = 0
+    total_valor = 0
+
+    for i in range(len(individuo)):
+        if individuo[i] == 1:  # Se o item foi escolhido (representado por 1)
+            total_peso += pesos_valores[i][0]  # Peso do item
+            total_valor += pesos_valores[i][1]  # Valor do item
+
+    # Penalização se o peso total excede a capacidade da mochila
+    if total_peso > peso_maximo:
+        penalidade = total_peso - peso_maximo
+        total_valor -= penalidade  # Penalização subtraindo o excesso de peso
+
+    return total_valor
+
 def crossover(individuo1, individuo2, taxa_cruzamento):
     """Realiza o crossover de ponto único entre dois indivíduos com uma certa taxa de cruzamento"""
     if random() < taxa_cruzamento:
