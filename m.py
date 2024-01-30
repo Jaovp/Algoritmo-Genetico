@@ -5,7 +5,7 @@ pesos_valores = [[8,60], [25,20], [30,100], [7,40], [10,50], [9,20], [9,50], [33
 
 peso_maximo = 100
 cromossomos = 15
-geracoes = 5
+geracoes = 20
 
 n_itens = len(pesos_valores)
 
@@ -14,7 +14,7 @@ populacao = population(cromossomos, n_itens)
 print("Populacao Inicial:")
 print()
 for i in range(len(populacao)):
-        print(f"Individuo {i + 1}: {populacao[i]} - Fitness: {fitness(populacao[i], peso_maximo, pesos_valores)}")
+    print(f"Individuo {i + 1}: {populacao[i]} - Fitness: {fitness(populacao[i], peso_maximo, pesos_valores)}")
 print()
 
 taxa_mutacao = 0.2
@@ -24,6 +24,7 @@ fitness_values = []
 
 # melhor fitness
 melhor_fitness = float('-inf')
+melhor_cromossomo = None  # Variável para rastrear o melhor cromossomo
 
 melhor_fitness_values = []
 generations = []
@@ -52,7 +53,7 @@ for geracao in range(geracoes):
         fitness_value = fitness(individuo, peso_maximo, pesos_valores)
         fitness_values.append(fitness_value)
 
-        # Atualiza o melhor_fitness se o valor de fitness atual for melhor
+        # Atualiza o melhor_fitness e o melhor_cromossomo se o valor de fitness atual for melhor
         if fitness_value > melhor_fitness:
             melhor_fitness = fitness_value
             melhor_cromossomo = individuo
@@ -65,10 +66,9 @@ for geracao in range(geracoes):
     for i in range(len(populacao)):
         print(f"Individuo {i + 1}: {populacao[i]} - Fitness: {fitness(populacao[i], peso_maximo, pesos_valores)}")
     print()
-    print("Melhor fitness alcancado: ", melhor_fitness)
+    print("Melhor fitness alcançado: ", melhor_fitness)
+    print("Melhor cromossomo: ", melhor_cromossomo)
     print()
-
-
 
 plt.plot(generations, melhor_fitness_values, marker='o')
 plt.xlabel('Geracao')
@@ -76,4 +76,4 @@ plt.ylabel('Melhor Fitness')
 plt.title('Melhor Fitness por Geracao')
 plt.grid(True)
 plt.show()
-    
+
