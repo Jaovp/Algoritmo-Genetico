@@ -20,15 +20,15 @@ def fitness(individuo, peso_maximo, pesos_valores):
     else:
         return peso_total  #  fitness é o valor total
     
-def crossover(individuo1, individuo2):
-    """Realiza o crossover de ponto único entre dois indivíduos"""
-    ponto_corte = randint(1, len(individuo1) - 1)
-    print(f"Individuo selecionado 1: {individuo1}")
-    print(f"Individuo selecionado 2: {individuo2}")
-    print ("-")
-    filho1 = individuo1[:ponto_corte] + individuo2[ponto_corte:]
-    filho2 = individuo2[:ponto_corte] + individuo1[ponto_corte:]
-    return filho1, filho2
+def crossover(individuo1, individuo2, taxa_cruzamento):
+    """Realiza o crossover de ponto único entre dois indivíduos com uma certa taxa de cruzamento"""
+    if random() < taxa_cruzamento:
+        ponto_corte = randint(1, len(individuo1) - 1)
+        filho1 = individuo1[:ponto_corte] + individuo2[ponto_corte:]
+        filho2 = individuo2[:ponto_corte] + individuo1[ponto_corte:]
+        return filho1, filho2
+    else:
+        return individuo1, individuo2
 
 def calcular_probabilidades_fitness(populacao, peso_maximo, pesos_valores):
     # Calcula o fitness de cada indivíduo na população
