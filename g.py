@@ -19,9 +19,14 @@ def fitness(individuo, peso_maximo, pesos_valores):
             total_valor += pesos_valores[i][1]  # Valor do item
 
     # Penalização se o peso total excede a capacidade da mochila
+    #if total_peso > peso_maximo:
+     #   penalidade = total_peso - peso_maximo
+      #  total_valor -= penalidade  # Penalização subtraindo o excesso de peso
     if total_peso > peso_maximo:
-        penalidade = total_peso - peso_maximo
-        total_valor -= penalidade  # Penalização subtraindo o excesso de peso
+        # Se o peso excede o limite, o fitness é negativo para desfavorecer esse indivíduo
+        return 1
+    else:
+        return total_valor
 
     return total_valor
 
