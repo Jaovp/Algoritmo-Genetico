@@ -1,13 +1,14 @@
 import matplotlib.pyplot as plt
 from g import*
 
-pesos_valores = [[8,60], [25,20], [30,100], [7,40], [10,50], [9,20], [9,50], [33,80], [2,50], [4,10], [19,5], [23,30], [14,35], [12,55]]
+pesos_valores = [[8,60], [25,20], [30,100], [7,40], [10,50], [9,20], [9,50], [33,80], [2,50], [4,10], [19,5], [23,30], [14,35], [12,55], [6,12], [9,30]]
 
 peso_maximo = 100
-cromossomos = 30
+cromossomos = 20
 geracoes = 20
 taxa_mutacao = 0.1
 taxa_cruzamento = 0.6
+
 
 n_itens = len(pesos_valores)
 
@@ -18,7 +19,6 @@ print()
 for i in range(len(populacao)):
     print(f"Individuo {i + 1}: {populacao[i]} - Fitness: {fitness(populacao[i], peso_maximo, pesos_valores)}")
 print()
-
 
 fitness_values = []
 # melhor fitness
